@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/signup.css";
 import musicNoteBeamed from "../assets/musicNoteBeamed.svg";
 import Button from "react-bootstrap/Button";
+import SpotifyAuth from 'react-spotify-auth';
 
 
 export default function Signup({ }) {
@@ -10,12 +11,15 @@ export default function Signup({ }) {
         btnContinueWithEmail: {
             disabled: false,
             // variant: "outline-warning",
-            backgroundColor: 'purple',
             children: "Add your Spotify account",
         },
     };
 
+
+
     useEffect(() => {
+        console.log(process.env.REACT_APP_SPOTIFY_CLIENT_ID)
+        console.log(process.env.REACT_APP_SPOTIFY_CLIENT_SECRET)
     }, []);
 
     return (
@@ -24,6 +28,7 @@ export default function Signup({ }) {
             <span className="sign-up-using-spotify">Sign up using Spotify</span>
             <Button
                 className="btn-continue-with-email-instance"
+                onClick={()=>{}}
                 {...propsData.btnContinueWithEmail}
             />
             <div className="flex-container">

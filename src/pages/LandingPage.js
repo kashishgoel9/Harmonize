@@ -33,7 +33,7 @@ export default function LandingPage({ }) {
                 className="btn-create-account-instance"
                 {...propsData.btnCreateAccount}
             />
-            <span className="privacy-and-agreemen">
+            <span className="privacy-and-agreemen-">
                 Already have an account? Sign In
             </span>
             <img className="home-indicator" src={homeIndicator} />
