@@ -1,36 +1,31 @@
-import * as React from "react";
+// import * as React from "react";
 import "./App.css";
-import photo from "./assets/photo.svg";
-import onboardingDots from "./assets/onboardingDots.svg";
-import homeIndicator from "./assets/homeIndicator.svg";
-import Button from "react-bootstrap/Button";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Signup from "./pages/Signup";
+import LandingPage from "./pages/LandingPage";
+import Homepage from "./pages/Homepage";
+
 const App = () => {
-  const propsData = {
-    btnCreateAccount: {
-      size: "lg",
-      disabled: false,
-      active: true,
-      variant: "outline-dark",
-      children: "Create an account",
-    },
-  };
   return (
-    <div className="onboarding">
-      <img className="photo" src={photo} />
-      <span className="algorithm">Algorithm</span>
-      <span className="finding-love-through-music-one-s">
-        Finding love through music, one Spotify playlist at a time.
-      </span>
-      <img className="onboarding-dots" src={onboardingDots} />
-      <Button
-        className="btn-create-account-instance"
-        {...propsData.btnCreateAccount}
-      />
-      <span className="privacy-and-agreemen">
-        Already have an account? Sign In
-      </span>
-      <img className="home-indicator" src={homeIndicator} />
-    </div>
+    <Router>
+      {/* <Header setUser={setUser} cart={cart} user={user} /> */}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={<Homepage />} />
+        {/* <Route
+          path="/:establishmentUniqueName/check"
+          element={
+            <Check
+              cart={cart}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveItem}
+              onClearCart={handleClearCart}
+            />
+          }></Route> */}
+      </Routes>
+    </Router>
   );
 };
+
 export default App;

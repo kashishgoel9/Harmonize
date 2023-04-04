@@ -53,6 +53,9 @@
   flex-basis: 7%;
   margin-bottom: 3px;
   margin-left: 2px;
+  background-color: #67E7D9 !important;
+  border: none;
+  border-radius: 15px;
 }
 
 .privacy-and-agreemen {
