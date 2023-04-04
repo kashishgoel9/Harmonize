@@ -1,38 +1,68 @@
-.App {
+.onboarding {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+  color: #67e7d9;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding-top: 41px;
+  font-family: Montserrat, Arial;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 17px;
+  display: flex;
 }
 
-.App-link {
-  color: #61dafb;
+.photo {
+  width: 375px;
+  height: 360px;
+  object-fit: cover;
+  align-self: flex-start;
+  margin-top: 5px;
+  margin-bottom: 21px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.algorithm {
+  align-self: center;
+  margin-top: 4px;
+  font-size: 1.5rem;
+  line-height: 36px;
+}
+
+.finding-love-through-music-one-s {
+  color: #323755;
+  align-self: center;
+  margin-bottom: 18px;
+  margin-left: 1px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.onboarding-dots {
+  width: 40px;
+  height: 9px;
+  object-fit: cover;
+  align-self: center;
+  margin-top: 2px;
+}
+
+.btn-create-account-instance {
+  width: 80%;
+  flex-basis: 7%;
+  margin-bottom: 3px;
+  margin-left: 2px;
+}
+
+.privacy-and-agreemen {
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.home-indicator {
+  width: 375px;
+  height: 34px;
+  object-fit: cover;
+  align-self: flex-start;
 }
