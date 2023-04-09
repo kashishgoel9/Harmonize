@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import SpotifyWebApi from 'spotify-web-api-js';
 import "../css/homepage.css";
+import { refreshAccessToken } from '../helpers/auth_helper'
 
 import paginationV from "../assets/paginationV.svg";
 import btnFilter from "../assets/btnFilter.svg";
@@ -11,7 +13,11 @@ import btnBack from "../assets/btnBack.svg";
 import navBar from "../assets/navBar.svg";
 import Button from "react-bootstrap/Button";
 
+
+const spotifyApi = new SpotifyWebApi();
+
 export default function Homepage({ }) {
+
     // const [tax_rate, setTaxRate] = useState(0.0);
     const propsData = {
         location: {
@@ -21,14 +27,69 @@ export default function Homepage({ }) {
         },
     };
 
-    useEffect(() => {
-    }, []);
+    // useEffect(() => {
+    //     // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
+    //     console.log(localStorage.getItem('expires_in') * 1000,new Date().getTime())
+    //     if (localStorage.getItem('expires_in') * 1000 < new Date().getTime()) {
+    //         // logoutAction();
+    //         console.log('Time Expired, refreshing it.',localStorage.getItem('refresh_token'));
+
+    //     }
+    // }, []);
 
     return (
         <div className="main">
             <div className="flex-container">
                 <img className="btn-back" src={btnBack} />
-                <div className="flex-container-1">
+                <div className="flex-container-1"
+                    onClick={() => {
+                        // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
+                        refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
+                            // console.log("refreshed token :)")
+                            // console.log(data)
+                            // console.log(spotifyApi);
+                            spotifyApi.getMySavedTracks()
+                                .then((response) => {
+                                    console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                });
+                            spotifyApi.getMe()
+                                .then((response) => {
+                                    console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                });
+                            spotifyApi.getUser("8vdbh1l832bir71plxiziiyed")
+                                .then((response) => {
+                                    console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                });
+                            // spotifyApi.getRecommendations()
+                            //     .then((response) => {
+                            //         console.log(response);
+                            //     })
+                            //     .catch((error) => {
+                            //         console.error(error);
+                            //     });
+                            spotifyApi.getAvailableGenreSeeds()
+                                .then((response) => {
+                                    console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                });
+                        }).catch((e) => {
+                            console.log(e)
+                            console.log("failed during refresh :(")
+                        })
+
+                    }}
+                >
                     <span className="harmonize">Harmonize</span>
                     <span className="new-york-ny">New York, NY</span>
                 </div>

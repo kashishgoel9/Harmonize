@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
 import Homepage from "./pages/Homepage";
+import Auth from "./pages/Auth";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Homepage />} />
+        <Route path="/callback" element={<Auth />} />
         {/* <Route
           path="/:establishmentUniqueName/check"
           element={
