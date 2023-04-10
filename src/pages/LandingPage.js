@@ -7,6 +7,7 @@ import homeIndicator from "../assets/homeIndicator.svg";
 import Button from "react-bootstrap/Button";
 
 export default function LandingPage({ }) {
+    const navigate = useNavigate();
     // const [tax_rate, setTaxRate] = useState(0.0);
     const propsData = {
         btnCreateAccount: {
@@ -32,6 +33,9 @@ export default function LandingPage({ }) {
             <Button
                 className="btn-create-account-instance"
                 {...propsData.btnCreateAccount}
+                onClick={()=>{
+                    navigate('/signup')
+                }}
             />
             <span className="privacy-and-agreemen-">
                 Already have an account? Sign In
