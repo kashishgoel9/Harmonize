@@ -18,7 +18,50 @@ const spotifyApi = new SpotifyWebApi();
 
 export default function Homepage({ }) {
 
-    // const [tax_rate, setTaxRate] = useState(0.0);
+    const [topTracks, setTopTracks] = useState(null);
+    let trackAudioAnalysisIds = [];
+    const [trackAudioAnalysis, setTrackAudioAnalysis] = useState(null);
+    // const [acousticness, setAcousticness] = useState(null);
+    // const [danceability, setDanceability] = useState(null);
+    // const [duration_ms, setDurationMS] = useState(null);
+    // const [energy, setEnergy] = useState(null);
+    // const [instrumentalness, setInstrumentalness] = useState(null);
+    // const [key, setKey] = useState(null);
+    // const [liveness, setLiveness] = useState(null);
+    // const [loudness, setLoudness] = useState(null);
+    // const [mode, setMode] = useState(null);
+    // const [speechiness, setSpeechiness] = useState(null);
+    // const [tempo, setTempo] = useState(null);
+    // const [time_signature, setTimeSignature] = useState(null);
+    // const [valence, setValence] = useState(null);
+    let acousticness = [];
+    let danceability = [];
+    let duration_ms = [];
+    let energy = [];
+    let instrumentalness = [];
+    let key = [];
+    let liveness = [];
+    let loudness = [];
+    let mode = [];
+    let speechiness = [];
+    let tempo = [];
+    let time_signature = [];
+    let valence = [];
+
+    let [acousticness_mean, setAcousticness] = useState(null);
+    let [danceability_mean, setDanceability] = useState(null);
+    let [duration_ms_mean, setDurationMS] = useState(null);
+    let [energy_mean, setEnergy] = useState(null);
+    let [instrumentalness_mean, setInstrumentalness] = useState(null);
+    let [key_mean, setKey] = useState(null);
+    let [liveness_mean, setLiveness] = useState(null);
+    let [loudness_mean, setLoudness] = useState(null);
+    let [mode_mean, setMode] = useState(null);
+    let [speechiness_mean, setSpeechiness] = useState(null);
+    let [tempo_mean, setTempo] = useState(null);
+    let [time_signature_mean, setTimeSignature] = useState(null);
+    let [valence_mean, setValence] = useState(null);
+
     const propsData = {
         location: {
             variant: "light",
@@ -37,6 +80,230 @@ export default function Homepage({ }) {
     //     }
     // }, []);
 
+
+
+    // useEffect(() => {
+    //     function mean_cal(x_list) {
+    //         let summer = 0;
+    //         let len = x_list.length;
+    //         for (let index in x_list) {
+    //             summer += x_list[index]
+    //         }
+
+    //         return summer / len;
+    //     }
+
+    //     if (trackAudioAnalysis) {
+    //         console.log(trackAudioAnalysis.length)
+    //         for (let index in trackAudioAnalysis) {
+    //             acousticness.push(trackAudioAnalysis[index]['acousticness'])
+    //             danceability.push(trackAudioAnalysis[index]['danceability'])
+    //             duration_ms.push(trackAudioAnalysis[index]['duration_ms'])
+    //             energy.push(trackAudioAnalysis[index]['energy'])
+    //             instrumentalness.push(trackAudioAnalysis[index]['instrumentalness'])
+    //             key.push(trackAudioAnalysis[index]['key'])
+    //             liveness.push(trackAudioAnalysis[index]['liveness'])
+    //             loudness.push(trackAudioAnalysis[index]['loudness'])
+    //             mode.push(trackAudioAnalysis[index]['mode'])
+    //             speechiness.push(trackAudioAnalysis[index]['speechiness'])
+    //             tempo.push(trackAudioAnalysis[index]['tempo'])
+    //             time_signature.push(trackAudioAnalysis[index]['time_signature'])
+    //             valence.push(trackAudioAnalysis[index]['valence'])
+    //         }
+    //         setAcousticness(mean_cal(acousticness))
+    //         setDanceability(mean_cal(danceability))
+    //         setDurationMS(mean_cal(duration_ms))
+    //         setEnergy(mean_cal(energy))
+    //         setInstrumentalness(mean_cal(instrumentalness))
+    //         setKey(mean_cal(key))
+    //         setLiveness(mean_cal(liveness))
+    //         setLoudness(mean_cal(loudness))
+    //         setMode(mean_cal(mode))
+    //         setSpeechiness(mean_cal(speechiness))
+    //         setTempo(mean_cal(tempo))
+    //         setTimeSignature(mean_cal(time_signature))
+    //         setValence(mean_cal(valence))
+
+    //         console.log(
+    //             acousticness_mean,
+    //             danceability_mean,
+    //             duration_ms_mean,
+    //             energy_mean,
+    //             instrumentalness_mean,
+    //             key_mean,
+    //             liveness_mean,
+    //             loudness_mean,
+    //             mode_mean,
+    //             speechiness_mean,
+    //             tempo_mean,
+    //             time_signature_mean,
+    //             valence_mean)
+    //             // I'll send their spotify id, first name, last name, email, dob, phoneno, gender, and a list of sexual orientations
+    //             // let ob = {
+    //             //     // "spotify_user_id": "8vdbh1l832bir71plxiziiyed",
+    //             //     "first_name": "Aryan",
+    //             //     "last_name": "Jalali",
+    //             //     "email": "aryanjalali1234@gmail.com",
+    //             //     "dob": "12/28/1998",
+    //             //     "phone": "+16466832431",
+    //             //     "gender": "Male",
+    //             //     "sexual_orientations": ["straight", "gay", "lesbian", "bisexual", "asexual", "demisexual", "pansexual", "queer", "questioning"],
+    //             //     "artists": [{
+    //             //         "external_urls": {
+    //             //             "spotify": "https://open.spotify.com/artist/2wUjUUtkb5lvLKcGKsKqsR"
+    //             //         },
+    //             //         "followers": {
+    //             //             "href": null,
+    //             //             "total": 0
+    //             //         },
+    //             //         "genres": [
+    //             //             "canadian contemporary r&b",
+    //             //             "canadian pop",
+    //             //             "dance pop",
+    //             //             "electropop",
+    //             //             "pop",
+    //             //             "post-teen pop"
+    //             //         ],
+    //             //         "href": "https://api.spotify.com/v1/artists/2wUjUUtkb5lvLKcGKsKqsR",
+    //             //         "id": "2wUjUUtkb5lvLKcGKsKqsR",
+    //             //         "images": [
+    //             //             {
+    //             //                 "height": 640,
+    //             //                 "url": "https://i.scdn.co/image/ab6761610000e5ebe74b7398634a741f74858dc7",
+    //             //                 "width": 640
+    //             //             },
+    //             //             {
+    //             //                 "height": 320,
+    //             //                 "url": "https://i.scdn.co/image/ab67616100005174e74b7398634a741f74858dc7",
+    //             //                 "width": 320
+    //             //             },
+    //             //             {
+    //             //                 "height": 160,
+    //             //                 "url": "https://i.scdn.co/image/ab6761610000f178e74b7398634a741f74858dc7",
+    //             //                 "width": 160
+    //             //             }
+    //             //         ],
+    //             //         "name": "Alessia Cara",
+    //             //         "popularity": 75,
+    //             //         "type": "artist",
+    //             //         "uri": "spotify:artist:2wUjUUtkb5lvLKcGKsKqsR"
+    //             //     }],
+    //             //     "tracks": [{
+    //             //         "album": {
+    //             //             "album_type": "SINGLE",
+    //             //             "artists": [
+    //             //                 {
+    //             //                     "external_urls": {
+    //             //                         "spotify": "https://open.spotify.com/artist/7i3eGEz3HNFnPOCdc7mqoq"
+    //             //                     },
+    //             //                     "href": "https://api.spotify.com/v1/artists/7i3eGEz3HNFnPOCdc7mqoq",
+    //             //                     "id": "7i3eGEz3HNFnPOCdc7mqoq",
+    //             //                     "name": "Akano",
+    //             //                     "type": "artist",
+    //             //                     "uri": "spotify:artist:7i3eGEz3HNFnPOCdc7mqoq"
+    //             //                 }
+    //             //             ],
+    //             //             "available_markets": [],
+    //             //             "external_urls": {
+    //             //                 "spotify": "https://open.spotify.com/album/1O5nqluvqOUXZN9DeoHUp7"
+    //             //             },
+    //             //             "href": "https://api.spotify.com/v1/albums/1O5nqluvqOUXZN9DeoHUp7",
+    //             //             "id": "1O5nqluvqOUXZN9DeoHUp7",
+    //             //             "images": [
+    //             //                 {
+    //             //                     "height": 640,
+    //             //                     "url": "https://i.scdn.co/image/ab67616d0000b27341a5d85e3faace60bb9e8200",
+    //             //                     "width": 640
+    //             //                 },
+    //             //                 {
+    //             //                     "height": 300,
+    //             //                     "url": "https://i.scdn.co/image/ab67616d00001e0241a5d85e3faace60bb9e8200",
+    //             //                     "width": 300
+    //             //                 },
+    //             //                 {
+    //             //                     "height": 64,
+    //             //                     "url": "https://i.scdn.co/image/ab67616d0000485141a5d85e3faace60bb9e8200",
+    //             //                     "width": 64
+    //             //                 }
+    //             //             ],
+    //             //             "name": "Gurenge (From \"Demon Slayer: Kimetsu no Yaiba\")",
+    //             //             "release_date": "2019-05-10",
+    //             //             "release_date_precision": "day",
+    //             //             "total_tracks": 1,
+    //             //             "type": "album",
+    //             //             "uri": "spotify:album:1O5nqluvqOUXZN9DeoHUp7"
+    //             //         },
+    //             //         "artists": [
+    //             //             {
+    //             //                 "external_urls": {
+    //             //                     "spotify": "https://open.spotify.com/artist/7i3eGEz3HNFnPOCdc7mqoq"
+    //             //                 },
+    //             //                 "href": "https://api.spotify.com/v1/artists/7i3eGEz3HNFnPOCdc7mqoq",
+    //             //                 "id": "7i3eGEz3HNFnPOCdc7mqoq",
+    //             //                 "name": "Akano",
+    //             //                 "type": "artist",
+    //             //                 "uri": "spotify:artist:7i3eGEz3HNFnPOCdc7mqoq"
+    //             //             }
+    //             //         ],
+    //             //         "available_markets": [],
+    //             //         "disc_number": 1,
+    //             //         "duration_ms": 89783,
+    //             //         "explicit": false,
+    //             //         "external_ids": {
+    //             //             "isrc": "QZGWW1904526"
+    //             //         },
+    //             //         "external_urls": {
+    //             //             "spotify": "https://open.spotify.com/track/19Qu5BOV1Y8nDrzgYavYdB"
+    //             //         },
+    //             //         "href": "https://api.spotify.com/v1/tracks/19Qu5BOV1Y8nDrzgYavYdB",
+    //             //         "id": "19Qu5BOV1Y8nDrzgYavYdB",
+    //             //         "is_local": false,
+    //             //         "name": "Gurenge (From \"Demon Slayer: Kimetsu no Yaiba\")",
+    //             //         "popularity": 0,
+    //             //         "preview_url": null,
+    //             //         "track_number": 1,
+    //             //         "type": "track",
+    //             //         "uri": "spotify:track:19Qu5BOV1Y8nDrzgYavYdB"
+    //             //     }]
+    //             // };
+
+    //         if (acousticness_mean != null) {
+    //             refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
+                    
+    //             })
+    //         }
+
+    //     }
+    // }, [
+    //     trackAudioAnalysis, 
+    //     danceability_mean,
+    //     acousticness_mean,
+    //     duration_ms_mean,
+    //     energy_mean,
+    //     instrumentalness_mean,
+    //     key_mean,
+    //     liveness_mean,
+    //     loudness_mean,
+    //     mode_mean,
+    //     speechiness_mean,
+    //     tempo_mean,
+    //     time_signature_mean,
+    //     valence_mean,
+    //     acousticness,
+    //     danceability,
+    //     duration_ms,
+    //     energy,
+    //     instrumentalness,
+    //     key,
+    //     liveness,
+    //     loudness,
+    //     mode,
+    //     speechiness,
+    //     tempo,
+    //     time_signature,
+    //     valence,
+    // ])
+
     return (
         <div className="main">
             <div className="flex-container">
@@ -48,13 +315,13 @@ export default function Homepage({ }) {
                             // console.log("refreshed token :)")
                             // console.log(data)
                             // console.log(spotifyApi);
-                            spotifyApi.getMySavedTracks()
-                                .then((response) => {
-                                    console.log(response);
-                                })
-                                .catch((error) => {
-                                    console.error(error);
-                                });
+                            // spotifyApi.getMySavedTracks()
+                            //     .then((response) => {
+                            //         console.log(response);
+                            //     })
+                            //     .catch((error) => {
+                            //         console.error(error);
+                            //     });
                             spotifyApi.getMe()
                                 .then((response) => {
                                     console.log(response);
@@ -62,13 +329,13 @@ export default function Homepage({ }) {
                                 .catch((error) => {
                                     console.error(error);
                                 });
-                            spotifyApi.getUser("8vdbh1l832bir71plxiziiyed")
-                                .then((response) => {
-                                    console.log(response);
-                                })
-                                .catch((error) => {
-                                    console.error(error);
-                                });
+                            // spotifyApi.getUser("8vdbh1l832bir71plxiziiyed")
+                            //     .then((response) => {
+                            //         console.log(response);
+                            //     })
+                            //     .catch((error) => {
+                            //         console.error(error);
+                            //     });
                             // spotifyApi.getRecommendations()
                             //     .then((response) => {
                             //         console.log(response);
@@ -76,9 +343,60 @@ export default function Homepage({ }) {
                             //     .catch((error) => {
                             //         console.error(error);
                             //     });
-                            spotifyApi.getAvailableGenreSeeds()
+                            // spotifyApi.getAvailableGenreSeeds()
+                            //     .then((response) => {
+                            //         console.log(response);
+                            //     })
+                            //     .catch((error) => {
+                            //         console.error(error);
+                            //     });
+                            spotifyApi.getMyTopArtists(
+                                {
+                                    // "type": "tracks",
+                                    "time_range": "long_term",
+                                    "limit": 50,
+                                    "offset": 0
+                                }
+                            )
+                                .then((response) => {
+                                    console.log("Artists");
+                                    console.log(response);
+                                    // setTopTracks(response['items'])
+                                    // for (let index in response['items']) {
+                                    //     trackAudioAnalysisIds.push(response['items'][index]['id'])
+                                    // }
+                                    // // console.log(trackAudioAnalysisIds)
+                                    // // console.log(trackAudioAnalysisIds.length)
+                                    // spotifyApi.getAudioFeaturesForTracks(trackAudioAnalysisIds)
+                                    //     .then((response) => {
+                                    //         console.log(response);
+                                    //         setTrackAudioAnalysis(response['audio_features'])
+                                    //     })
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                });
+                            spotifyApi.getMyTopTracks(
+                                {
+                                    // "type": "tracks",
+                                    "time_range": "long_term",
+                                    "limit": 50,
+                                    "offset": 0
+                                }
+                            )
                                 .then((response) => {
                                     console.log(response);
+                                    setTopTracks(response['items'])
+                                    for (let index in response['items']) {
+                                        trackAudioAnalysisIds.push(response['items'][index]['id'])
+                                    }
+                                    // console.log(trackAudioAnalysisIds)
+                                    // console.log(trackAudioAnalysisIds.length)
+                                    spotifyApi.getAudioFeaturesForTracks(trackAudioAnalysisIds)
+                                        .then((response) => {
+                                            console.log(response);
+                                            setTrackAudioAnalysis(response['audio_features'])
+                                        })
                                 })
                                 .catch((error) => {
                                     console.error(error);

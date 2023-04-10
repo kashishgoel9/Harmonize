@@ -19,7 +19,7 @@ export default function Signup({ }) {
 
     let scopes = ['user-read-email', 'user-read-private', 'user-library-read', 'user-follow-read', 'user-read-recently-played', 'user-top-read', ''];
 
-
+// Profile details, I am, Passions, Match, Filters, Matches, Profile, Profile-ex
 
     useEffect(() => {
         // console.log(process.env.REACT_APP_SPOTIFY_CLIENT_ID)
