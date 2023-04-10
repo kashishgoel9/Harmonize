@@ -20,47 +20,7 @@ export default function Homepage({ }) {
 
     const [topTracks, setTopTracks] = useState(null);
     let trackAudioAnalysisIds = [];
-    const [trackAudioAnalysis, setTrackAudioAnalysis] = useState(null);
-    // const [acousticness, setAcousticness] = useState(null);
-    // const [danceability, setDanceability] = useState(null);
-    // const [duration_ms, setDurationMS] = useState(null);
-    // const [energy, setEnergy] = useState(null);
-    // const [instrumentalness, setInstrumentalness] = useState(null);
-    // const [key, setKey] = useState(null);
-    // const [liveness, setLiveness] = useState(null);
-    // const [loudness, setLoudness] = useState(null);
-    // const [mode, setMode] = useState(null);
-    // const [speechiness, setSpeechiness] = useState(null);
-    // const [tempo, setTempo] = useState(null);
-    // const [time_signature, setTimeSignature] = useState(null);
-    // const [valence, setValence] = useState(null);
-    let acousticness = [];
-    let danceability = [];
-    let duration_ms = [];
-    let energy = [];
-    let instrumentalness = [];
-    let key = [];
-    let liveness = [];
-    let loudness = [];
-    let mode = [];
-    let speechiness = [];
-    let tempo = [];
-    let time_signature = [];
-    let valence = [];
-
-    let [acousticness_mean, setAcousticness] = useState(null);
-    let [danceability_mean, setDanceability] = useState(null);
-    let [duration_ms_mean, setDurationMS] = useState(null);
-    let [energy_mean, setEnergy] = useState(null);
-    let [instrumentalness_mean, setInstrumentalness] = useState(null);
-    let [key_mean, setKey] = useState(null);
-    let [liveness_mean, setLiveness] = useState(null);
-    let [loudness_mean, setLoudness] = useState(null);
-    let [mode_mean, setMode] = useState(null);
-    let [speechiness_mean, setSpeechiness] = useState(null);
-    let [tempo_mean, setTempo] = useState(null);
-    let [time_signature_mean, setTimeSignature] = useState(null);
-    let [valence_mean, setValence] = useState(null);
+    // const [trackAudioAnalysis, setTrackAudioAnalysis] = useState(null);
 
     const propsData = {
         location: {
@@ -312,16 +272,6 @@ export default function Homepage({ }) {
                     onClick={() => {
                         // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
                         refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
-                            // console.log("refreshed token :)")
-                            // console.log(data)
-                            // console.log(spotifyApi);
-                            // spotifyApi.getMySavedTracks()
-                            //     .then((response) => {
-                            //         console.log(response);
-                            //     })
-                            //     .catch((error) => {
-                            //         console.error(error);
-                            //     });
                             spotifyApi.getMe()
                                 .then((response) => {
                                     console.log(response);
@@ -329,74 +279,31 @@ export default function Homepage({ }) {
                                 .catch((error) => {
                                     console.error(error);
                                 });
-                            // spotifyApi.getUser("8vdbh1l832bir71plxiziiyed")
-                            //     .then((response) => {
-                            //         console.log(response);
-                            //     })
-                            //     .catch((error) => {
-                            //         console.error(error);
-                            //     });
-                            // spotifyApi.getRecommendations()
-                            //     .then((response) => {
-                            //         console.log(response);
-                            //     })
-                            //     .catch((error) => {
-                            //         console.error(error);
-                            //     });
-                            // spotifyApi.getAvailableGenreSeeds()
-                            //     .then((response) => {
-                            //         console.log(response);
-                            //     })
-                            //     .catch((error) => {
-                            //         console.error(error);
-                            //     });
                             spotifyApi.getMyTopArtists(
                                 {
-                                    // "type": "tracks",
                                     "time_range": "long_term",
                                     "limit": 50,
                                     "offset": 0
                                 }
                             )
                                 .then((response) => {
-                                    console.log("Artists");
+                                    console.log("Top Artists:");
                                     console.log(response);
-                                    // setTopTracks(response['items'])
-                                    // for (let index in response['items']) {
-                                    //     trackAudioAnalysisIds.push(response['items'][index]['id'])
-                                    // }
-                                    // // console.log(trackAudioAnalysisIds)
-                                    // // console.log(trackAudioAnalysisIds.length)
-                                    // spotifyApi.getAudioFeaturesForTracks(trackAudioAnalysisIds)
-                                    //     .then((response) => {
-                                    //         console.log(response);
-                                    //         setTrackAudioAnalysis(response['audio_features'])
-                                    //     })
                                 })
                                 .catch((error) => {
                                     console.error(error);
                                 });
                             spotifyApi.getMyTopTracks(
                                 {
-                                    // "type": "tracks",
                                     "time_range": "long_term",
                                     "limit": 50,
                                     "offset": 0
                                 }
                             )
                                 .then((response) => {
+                                    console.log("Top Tracks:");
                                     console.log(response);
                                     setTopTracks(response['items'])
-                                    for (let index in response['items']) {
-                                        trackAudioAnalysisIds.push(response['items'][index]['id'])
-                                    }
-                                    // console.log(trackAudioAnalysisIds)
-                                    // console.log(trackAudioAnalysisIds.length)
-                                    spotifyApi.getAudioFeaturesForTracks(trackAudioAnalysisIds)
-                                        .then((response) => {
-                                            console.log(response);
-                                            setTrackAudioAnalysis(response['audio_features'])
-                                        })
                                 })
                                 .catch((error) => {
                                     console.error(error);
