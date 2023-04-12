@@ -5,6 +5,9 @@ import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
 import Homepage from "./pages/Homepage";
 import Auth from "./pages/Auth";
+import Iam from "./pages/Iam";
+import ProfileDetails from "./pages/ProfileDetails";
+import Passions from "./pages/Passions";
 
 const App = () => {
   return (
@@ -15,6 +18,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/callback" element={<Auth />} />
+        <Route path="/profiledetails" element={<ProfileDetails />} />
+        <Route path="/iam" element={<Iam />} />
+        <Route path="/passions" element={<Passions />} />
         {/* <Route
           path="/:establishmentUniqueName/check"
           element={
