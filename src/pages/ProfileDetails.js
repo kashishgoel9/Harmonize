@@ -5,7 +5,20 @@ import iconbackwhite from "../assets/iconbackwhite.svg";
 import rectangle from "../assets/rectangle.svg";
 import face from "../assets/face.svg";
 import iconCalendar from "../assets/iconCalendar.svg";
+import Button from "react-bootstrap/Button";
+import { useNavigate, useParams } from "react-router-dom";
+
 const ProfileDetails = () => {
+  const navigate = useNavigate();
+    const propsData = {
+        btnCreateProfile: {
+            size: "lg",
+            disabled: false,
+            active: true,
+            children: "Confirm",
+        },
+    };
+
   return (
     <div className="profile-details">
       <span className="profile-details-1">Profile details</span>
@@ -28,11 +41,13 @@ const ProfileDetails = () => {
           <span className="num-22091997">Choose birthday date</span>
         </div>
       </button>
-      <button className="btn-confirm">
-        <div className="container">
-          <span className="confirm">Confirm</span>
-        </div>
-      </button>
+      <Button
+                className="btn-confirm"
+                {...propsData.btnCreateProfile}
+                onClick={()=>{
+                    navigate('/iam')
+                }}
+            />
     </div>
   );
 };

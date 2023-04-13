@@ -40,7 +40,7 @@ const Auth = () => {
                         localStorage.setItem('expires_in', expires_in);
                         spotifyApi.setAccessToken(access_token);
     
-                        window.location.href = '/home';
+                        window.location.href = '/profiledetails';
                     }
 
                     // spotifyApi.getMySavedTracks()

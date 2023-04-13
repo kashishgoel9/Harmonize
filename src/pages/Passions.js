@@ -1,7 +1,19 @@
 import * as React from "react";
 import "../css/passions.css";
-import btnBack from "./assets/btnBack.svg";
+import btnBack from "../assets/btnBack.svg";
+import Button from "react-bootstrap/Button";
+import { useNavigate, useParams } from "react-router-dom";
+
 const Passions = () => {
+  const navigate = useNavigate();
+  const propsData = {
+    btnPassion: {
+        size: "lg",
+        disabled: false,
+        active: true,
+        children: "Continue",
+    },
+  };
   return (
     <div className="passions">
       <img className="btn-back" src={btnBack} />
@@ -61,11 +73,13 @@ const Passions = () => {
           <span className="questioning">Questioning</span>
         </div>
       </button>
-      <button className="btn-continue">
-        <div className="container">
-          <span className="continue">Continue</span>
-        </div>
-      </button>
+      <Button
+                className="btn-continue"
+                {...propsData.btnPassion}
+                onClick={()=>{
+                    navigate('/home')
+                }}
+            />
     </div>
   );
 };
