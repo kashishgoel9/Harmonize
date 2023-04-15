@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import photo from "../assets/photo.svg";
 import onboardingDots from "../assets/onboardingDots.svg";
 import homeIndicator from "../assets/homeIndicator.svg";

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import SpotifyWebApi from 'spotify-web-api-js';
 import "../css/homepage.css";
@@ -12,6 +13,8 @@ import homeIndicator from "../assets/homeIndicator2.svg";
 import btnBack from "../assets/btnBack.svg";
 import navBar from "../assets/navBar.svg";
 import Button from "react-bootstrap/Button";
+
+import { createUser, getCandidates, example_json_obj } from '../helpers/api_gateway_helper'
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -229,7 +232,7 @@ export default function Homepage({ }) {
 
     //         if (acousticness_mean != null) {
     //             refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
-                    
+
     //             })
     //         }
 
@@ -267,7 +270,9 @@ export default function Homepage({ }) {
     return (
         <div className="main">
             <div className="flex-container">
-                <img className="btn-back" src={btnBack} />
+                <img className="btn-back" src={btnBack} onClick={() => {
+                    createUser('szepetry', JSON.stringify(example_json_obj))
+                }} />
                 <div className="flex-container-1"
                     onClick={() => {
                         // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
@@ -318,7 +323,10 @@ export default function Homepage({ }) {
                     <span className="harmonize">Harmonize</span>
                     <span className="new-york-ny">New York, NY</span>
                 </div>
-                <img className="btn-filter" src={btnFilter} />
+                <img onClick={() => {
+                    // console.log("yep")
+                    getCandidates('8vdbh1l832bir71plxiziiyed');
+                }} className="btn-filter" src={btnFilter} alt="btn-filter" />
             </div>
             <div className="flex-container-2">
                 <img className="photo-bg" src={photoBg} />
