@@ -10,9 +10,9 @@
     display: flex;
   }
   
-  .container {
+  .container-iam {
     height: 100%;
-    background-color: #67e7d9;
+    /* background-color: #67e7d9; */
     border-radius: 15px;
     flex-direction: row;
     flex-basis: 100%;
@@ -22,6 +22,18 @@
     padding-left: 21px;
     padding-right: 20px;
     display: flex;
+  }
+
+  .selected{
+    background-color: #67e7d9 !important;
+    border: none;
+  }
+  
+  .not_selected{
+    background-color: white !important;
+    border: 1px solid rgba(128, 128, 128, 0.334);
+    color: black !important;
+    font-weight: normal;
   }
   
   .man {

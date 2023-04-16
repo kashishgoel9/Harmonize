@@ -38,7 +38,7 @@ export default function Signup({ }) {
                 }}
                 {...propsData.btnContinueWithEmail}
             />
-            <div className="flex-container">
+            <div className="flex-container-signup">
                 <span className="terms-of-use">Terms of use</span>
                 <span className="privacy-policy">Privacy Policy</span>
             </div>

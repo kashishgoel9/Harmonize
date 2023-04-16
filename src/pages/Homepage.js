@@ -14,7 +14,7 @@ import btnBack from "../assets/btnBack.svg";
 import navBar from "../assets/navBar.svg";
 import Button from "react-bootstrap/Button";
 
-import { createUser, getCandidates, example_json_obj } from '../helpers/api_gateway_helper'
+import { getCandidates } from '../helpers/api_gateway_helper'
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -22,8 +22,6 @@ const spotifyApi = new SpotifyWebApi();
 export default function Homepage({ }) {
 
     const [topTracks, setTopTracks] = useState(null);
-    let trackAudioAnalysisIds = [];
-    // const [trackAudioAnalysis, setTrackAudioAnalysis] = useState(null);
 
     const propsData = {
         location: {
@@ -269,54 +267,12 @@ export default function Homepage({ }) {
 
     return (
         <div className="main">
-            <div className="flex-container">
+            <div className="flex-container-home">
                 <img className="btn-back" src={btnBack} onClick={() => {
-                    createUser('szepetry', JSON.stringify(example_json_obj))
+                    
                 }} />
-                <div className="flex-container-1"
+                <div className="flex-container-1-home"
                     onClick={() => {
-                        // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
-                        refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
-                            spotifyApi.getMe()
-                                .then((response) => {
-                                    console.log(response);
-                                })
-                                .catch((error) => {
-                                    console.error(error);
-                                });
-                            spotifyApi.getMyTopArtists(
-                                {
-                                    "time_range": "long_term",
-                                    "limit": 50,
-                                    "offset": 0
-                                }
-                            )
-                                .then((response) => {
-                                    console.log("Top Artists:");
-                                    console.log(response);
-                                })
-                                .catch((error) => {
-                                    console.error(error);
-                                });
-                            spotifyApi.getMyTopTracks(
-                                {
-                                    "time_range": "long_term",
-                                    "limit": 50,
-                                    "offset": 0
-                                }
-                            )
-                                .then((response) => {
-                                    console.log("Top Tracks:");
-                                    console.log(response);
-                                    setTopTracks(response['items'])
-                                })
-                                .catch((error) => {
-                                    console.error(error);
-                                });
-                        }).catch((e) => {
-                            console.log(e)
-                            console.log("failed during refresh :(")
-                        })
 
                     }}
                 >
@@ -328,7 +284,7 @@ export default function Homepage({ }) {
                     getCandidates('8vdbh1l832bir71plxiziiyed');
                 }} className="btn-filter" src={btnFilter} alt="btn-filter" />
             </div>
-            <div className="flex-container-2">
+            <div className="flex-container-2-home">
                 <img className="photo-bg" src={photoBg} />
                 <img className="photo-main" src={photoMain} />
                 <div className="cat-absolute-container">
@@ -347,7 +303,7 @@ export default function Homepage({ }) {
                     </div>
                 </div>
             </div>
-            <div className="flex-container-3">
+            <div className="flex-container-3-home">
                 <span className="privacy-and-agreemen">Swipe Left</span>
                 <span className="privacy-and-agreemen-1">Swipe Right</span>
             </div>
@@ -355,7 +311,6 @@ export default function Homepage({ }) {
                 Your perfect potential matches, hand-picked from your music history.
             </span>
             <img className="nav-bar" src={navBar} />
-            <img className="home-indicator" src={homeIndicator} />
         </div>
     );
 }

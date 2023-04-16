@@ -1,3 +1,4 @@
+
 export const example_json_obj = {
     "first_name": "Aryan",
     "last_name": "Jalali",
@@ -128,9 +129,7 @@ export const example_json_obj = {
 export const createUser = async (userId, userData) => {
     let myHeaders = new Headers();
 
-    // myHeaders.append("x-amz-meta-customLabels", keyword);
     myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Access-Control-Allow-Origin", "*");
     myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
 
     let requestOptions = {
@@ -140,13 +139,10 @@ export const createUser = async (userId, userData) => {
         body: userData
     };
 
-    console.log("userId: ", userId)
-    console.log("userData: ", userData)
     let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/users/" + userId
     console.log(getUrl)
 
-    await fetch(getUrl, requestOptions)
-        .then(response => response.json())
+    return await fetch(getUrl, requestOptions)
         .then(data => {
             console.log("-----", data)
             return data;
@@ -156,9 +152,6 @@ export const createUser = async (userId, userData) => {
 export const getCandidates = async (userId) => {
     let myHeaders = new Headers();
 
-    // myHeaders.append("x-amz-meta-customLabels", keyword);
-    // myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Access-Control-Allow-Origin", "*");
     myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
 
     let requestOptions = {
