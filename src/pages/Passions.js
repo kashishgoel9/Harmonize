@@ -129,6 +129,7 @@ const Passions = () => {
             currentState.state.orientation = sexual_orientations;
             // console.log(currentState)
             await createUser(currentState.user_id, JSON.stringify(currentState.state)).then((res) => {
+              localStorage.setItem('state', JSON.stringify(currentState))
               navigate('/home', { state: currentState, replace: true })
 
             })

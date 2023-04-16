@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import SpotifyWebApi from 'spotify-web-api-js';
 import "../css/homepage.css";
 import { refreshAccessToken } from '../helpers/auth_helper'
@@ -20,8 +21,8 @@ import { getCandidates } from '../helpers/api_gateway_helper'
 const spotifyApi = new SpotifyWebApi();
 
 export default function Homepage({ }) {
-
-    const [topTracks, setTopTracks] = useState(null);
+    const location = useLocation();
+    const [currentCandidate, setCurrentCandidate] = useState(null);
 
     const propsData = {
         location: {
@@ -30,6 +31,30 @@ export default function Homepage({ }) {
             children: "1 mi",
         },
     };
+
+    useEffect(() => {
+        console.log(location.state)
+    })
+
+    async function getCandidatesHandler() {
+        const response = await getCandidates(JSON.parse(localStorage.getItem('state'))['user_id']);
+        if (!response || response.error) {
+            console.log("Error during fetching candidates")
+        }
+        else {
+            console.log(response)
+            if (response.candidate_found === true)
+                setCurrentCandidate(response)
+        }
+
+        // console.log(res.json())
+        // if (res.candidate_found === 'true')
+        //     setCurrentCandidate(res.candidate_id)
+    }
+
+    useEffect(() => {
+        getCandidatesHandler()
+    },[])
 
     // useEffect(() => {
     //     // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
@@ -269,7 +294,7 @@ export default function Homepage({ }) {
         <div className="main">
             <div className="flex-container-home">
                 <img className="btn-back" src={btnBack} onClick={() => {
-                    
+
                 }} />
                 <div className="flex-container-1-home"
                     onClick={() => {
@@ -280,8 +305,8 @@ export default function Homepage({ }) {
                     <span className="new-york-ny">New York, NY</span>
                 </div>
                 <img onClick={() => {
-                    // console.log("yep")
-                    getCandidates('8vdbh1l832bir71plxiziiyed');
+                    console.log(JSON.parse(localStorage.getItem('state'))['user_id'])
+                    // console.log(getCandidates(JSON.parse(localStorage.getItem('state'))['user_id']));
                 }} className="btn-filter" src={btnFilter} alt="btn-filter" />
             </div>
             <div className="flex-container-2-home">
@@ -293,7 +318,7 @@ export default function Homepage({ }) {
                     <div className="bottom-container">
                         <div className="mask-photo">
                             <div className="cat-absolute-container-1">
-                                <span className="jessica-parker-23">Jessica Parker, 23</span>
+                                <span className="jessica-parker-23">{currentCandidate? currentCandidate.candidate_id: "Jessica Parker"}, 23</span>
                                 <span className="top-artist-taylor-swift">
                                     Top Artist: Taylor Swift
                                 </span>

@@ -150,23 +150,25 @@ export const createUser = async (userId, userData) => {
 };
 
 export const getCandidates = async (userId) => {
-    let myHeaders = new Headers();
+    try {
+        let myHeaders = new Headers();
 
-    myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
+        myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
 
-    let requestOptions = {
-        crossDomain: true,
-        method: 'GET',
-        headers: myHeaders,
-    };
+        let requestOptions = {
+            crossDomain: true,
+            method: 'GET',
+            headers: myHeaders,
+        };
 
-    console.log("userId: ", userId)
-    let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/candidates/" + userId
-    console.log(getUrl);
-    await fetch(getUrl, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            console.log("-----", data)
-            return data;
-        });
+        console.log("userId: ", userId)
+        let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/candidates?id=" + userId
+        console.log(getUrl);
+
+        let res = await fetch(getUrl, requestOptions)
+        return res.json();
+    }
+    catch (e) {
+        throw e;
+    }
 };
