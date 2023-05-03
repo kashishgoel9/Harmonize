@@ -219,10 +219,3 @@
     align-self: flex-start;
     margin-top: 2px;
 }
-
-.home-indicator {
-    width: 375px;
-    height: 34px;
-    object-fit: cover;
-    align-self: flex-start;
-}

@@ -21,6 +21,7 @@ import { getCandidates } from '../helpers/api_gateway_helper'
 const spotifyApi = new SpotifyWebApi();
 
 export default function Homepage({ }) {
+    const navigate = useNavigate();
     const location = useLocation();
     const [currentCandidate, setCurrentCandidate] = useState(null);
 
@@ -54,7 +55,7 @@ export default function Homepage({ }) {
 
     useEffect(() => {
         getCandidatesHandler()
-    },[])
+    }, [])
 
     // useEffect(() => {
     //     // spotifyApi.setAccessToken(localStorage.getItem('access_token'));
@@ -294,7 +295,12 @@ export default function Homepage({ }) {
         <div className="main">
             <div className="flex-container-home">
                 <img className="btn-back" src={btnBack} onClick={() => {
-
+                    const url = 'https://accounts.spotify.com/en/logout'
+                    // const url = 'https://www.spotify.com/logout/'
+                    const spotifyLogoutWindow = window.open(url, 'Spotify Logout', 'width=700,height=500,top=40,left=40')
+                    setTimeout(() => spotifyLogoutWindow.close(), 2000)
+                    console.log("Done")
+                    navigate('/signup',)
                 }} />
                 <div className="flex-container-1-home"
                     onClick={() => {
@@ -318,7 +324,7 @@ export default function Homepage({ }) {
                     <div className="bottom-container">
                         <div className="mask-photo">
                             <div className="cat-absolute-container-1">
-                                <span className="jessica-parker-23">{currentCandidate? currentCandidate.candidate_id: "Jessica Parker"}, 23</span>
+                                <span className="jessica-parker-23">{currentCandidate ? currentCandidate.candidate_id : "Jessica Parker"}, 23</span>
                                 <span className="top-artist-taylor-swift">
                                     Top Artist: Taylor Swift
                                 </span>

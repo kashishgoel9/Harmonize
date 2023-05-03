@@ -33,14 +33,13 @@ export default function LandingPage({ }) {
             <Button
                 className="btn-create-account-instance"
                 {...propsData.btnCreateAccount}
-                onClick={()=>{
+                onClick={() => {
                     navigate('/signup')
                 }}
             />
-            <span className="privacy-and-agreemen-">
+            <span className="privacy-and-agreemen-" onClick={() => { navigate('/signin') }}>
                 Already have an account? Sign In
             </span>
-            <img className="home-indicator" src={homeIndicator} />
         </div>
     );
 }

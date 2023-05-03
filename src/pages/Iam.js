@@ -39,6 +39,13 @@ const Iam = () => {
 
   useEffect(() => {
     console.log(location.state)
+    currentState.state.gender = "F";
+    if (currentItem === 0)
+      currentState.state.gender = "F";
+    else if (currentItem === 1)
+      currentState.state.gender = "M";
+    else
+      currentState.state.gender = "O";
   });
 
 
@@ -49,7 +56,7 @@ const Iam = () => {
       <Cardman className="woman-instance"
         onClick={() => {
           setCurrentItem(0);
-          currentState.state.gender = "F";
+          // currentState.state.gender = "F";
         }}
         props={propsData.woman}
         isSelected={currentItem === 0 ? true : false}
@@ -57,14 +64,14 @@ const Iam = () => {
       <Cardman className={"man-instance-1"}
         onClick={() => {
           setCurrentItem(1)
-          currentState.state.gender = "M";
+          // currentState.state.gender = "M";
         }}
         props={propsData.man}
         isSelected={currentItem === 1 ? true : false} />
       <Cardman
         onClick={() => {
           setCurrentItem(2)
-          currentState.state.gender = "O";
+          // currentState.state.gender = "O";
         }}
         className="woman-1-instance"
         props={propsData.woman1}
