@@ -307,7 +307,7 @@ export default function Homepage({ }) {
 
                     }}
                 >
-                    <span className="harmonize">Harmonize</span>
+                    <span className="harmonize">Find Love</span>
                     <span className="new-york-ny">New York, NY</span>
                 </div>
                 <img onClick={() => {

@@ -9,6 +9,9 @@ import Auth from "./pages/Auth";
 import Iam from "./pages/Iam";
 import ProfileDetails from "./pages/ProfileDetails";
 import Passions from "./pages/Passions";
+import Matched from "./pages/Matched";
+import Matches from "./pages/Matches";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -23,6 +26,9 @@ const App = () => {
         <Route path="/profiledetails" element={<ProfileDetails />} />
         <Route path="/iam" element={<Iam />} />
         <Route path="/passions" element={<Passions />} />
+        <Route path="/matched" element={<Matched />} />
+        <Route path="/matches" element={<Matches />} />
+        <Route path="/profile" element={<Profile />} />
         {/* <Route
           path="/:establishmentUniqueName/check"
           element={
