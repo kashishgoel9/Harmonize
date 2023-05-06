@@ -80,7 +80,7 @@ const Iam = () => {
         className="btn-continue"
         {...propsData.btnCreateGender}
         onClick={() => {
-          navigate('/Passions', { state: currentState })
+          navigate('/passions', { state: currentState })
         }}
       />
     </div>
