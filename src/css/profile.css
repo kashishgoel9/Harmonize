@@ -1,7 +1,7 @@
 .profile {
     color: #000;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     background-color: #fff;
     flex-direction: column;
     justify-content: space-between;
@@ -11,6 +11,8 @@
     font-weight: 700;
     line-height: 21px;
     display: flex;
+    padding-bottom: 50px;
+    height: 100vh;
 }
 
 .photo-main-profile {
@@ -187,6 +189,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    padding-bottom: 50px;
 }
 
 .chip-css {
@@ -312,7 +315,7 @@
     margin-right: -96px;
 }
 
-.cat-absolute-container {
+.cat-absolute-container-profile {
     z-index: 1;
     height: 100%;
     flex-direction: row;

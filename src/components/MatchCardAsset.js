@@ -25,6 +25,7 @@ function MatchCardAsset({ matched_users }) {
                     );
                 })
             }
+            
         </div>
     );
 };

@@ -1,0 +1,19 @@
+.bottom_nav{
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    color: #67E7D9;
+    bottom: 0;
+}
+
+.bottom_nav_icon{
+    color: #67E7D9 !important;
+}
+
+.bottom_nav_icon_inactive{
+    color: gray !important;
+}
+
+.hide_item{
+    display: none !important;
+}

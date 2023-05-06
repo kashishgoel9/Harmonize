@@ -320,7 +320,7 @@ export default function Homepage({ }) {
                 <img className="photo-main" src={photoMain} />
                 <div className="cat-absolute-container">
                     <Button className="location-instance" {...propsData.location} />
-                    <img className="pagination-v" src={paginationV} />
+                    {/* <img className="pagination-v" src={paginationV} /> */}
                     <div className="bottom-container">
                         <div className="mask-photo">
                             <div className="cat-absolute-container-1">
@@ -329,7 +329,7 @@ export default function Homepage({ }) {
                                     Top Artist: Taylor Swift
                                 </span>
                             </div>
-                            <img className="photo-blurred-24-px" src={photoBlurred24Px} />
+                            {/* <img className="photo-blurred-24-px" src={photoBlurred24Px} /> */}
                         </div>
                     </div>
                 </div>

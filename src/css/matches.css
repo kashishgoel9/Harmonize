@@ -108,13 +108,18 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    /* overflow-y: auto; */
+    /* overflow-y: auto; */
+    height: 100vh;
+    padding-bottom: 20px;
+    /* or margin-bottom: 20px; */
 
 }
 
 /* Target the last card and make it left-aligned */
-.card-matched_user_container .photo-matches:last-child {
+/* .card-matched_user_container .photo-matches:last-child {
     margin-right: auto;
-}
+} */
 
 .photo-matches {
     height: 100%;
@@ -128,6 +133,7 @@
     align-self: flex-start;
     align-items: center;
     display: flex;
+    height: 250px;
 }
 
 .leilani-19 {

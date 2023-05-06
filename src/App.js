@@ -12,11 +12,13 @@ import Passions from "./pages/Passions";
 import Matched from "./pages/Matched";
 import Matches from "./pages/Matches";
 import Profile from "./pages/Profile";
+import BottomNavigationMenu from "./components/BottomNavigationMenu";
 
 const App = () => {
   return (
     <Router>
-      {/* <Header setUser={setUser} cart={cart} user={user} /> */}
+      <BottomNavigationMenu/>
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
