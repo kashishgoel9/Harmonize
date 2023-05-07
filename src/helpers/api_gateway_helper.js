@@ -8016,7 +8016,7 @@ export const createUser = async (userId, userData) => {
         headers: myHeaders,
         body: userData
     };
-// 8vdbh1l832bir71plxiziiyed
+    // 8vdbh1l832bir71plxiziiyed
     let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/users/" + userId
     console.log(getUrl)
 
@@ -8045,6 +8045,31 @@ export const getCandidates = async (userId) => {
 
         let res = await fetch(getUrl, requestOptions)
         return res.json();
+    }
+    catch (e) {
+        throw e;
+    }
+};
+
+export const getProfile = async (userId) => {
+    try {
+        let myHeaders = new Headers();
+
+        myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
+
+        let requestOptions = {
+            crossDomain: true,
+            method: 'GET',
+            headers: myHeaders,
+        };
+
+        // console.log("userId: ", userId)
+        let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/users/" + userId
+        console.log(getUrl);
+
+        let res = await fetch(getUrl, requestOptions)
+        // if (res.status === 200)
+        return res.json()
     }
     catch (e) {
         throw e;

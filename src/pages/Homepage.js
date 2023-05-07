@@ -15,7 +15,7 @@ import btnBack from "../assets/btnBack.svg";
 import navBar from "../assets/navBar.svg";
 import Button from "react-bootstrap/Button";
 
-import { getCandidates } from '../helpers/api_gateway_helper'
+import { getCandidates, getProfile } from '../helpers/api_gateway_helper'
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -23,6 +23,7 @@ const spotifyApi = new SpotifyWebApi();
 export default function Homepage({ }) {
     const navigate = useNavigate();
     const location = useLocation();
+    const [candidateLoading, setCandidateLoading] = useState(false);
     const [currentCandidate, setCurrentCandidate] = useState(null);
 
     const propsData = {
@@ -44,8 +45,11 @@ export default function Homepage({ }) {
         }
         else {
             console.log(response)
-            if (response.candidate_found === true)
+            if (response.candidate_found === true) {
                 setCurrentCandidate(response)
+                let candidate_user = await getProfile(response.candidate_id)
+                console.log(candidate_user.body)
+            }
         }
 
         // console.log(res.json())
@@ -324,7 +328,7 @@ export default function Homepage({ }) {
                     <div className="bottom-container">
                         <div className="mask-photo">
                             <div className="cat-absolute-container-1">
-                                <span className="jessica-parker-23">{currentCandidate ? currentCandidate.candidate_id : "Jessica Parker"}, 23</span>
+                                <span className="jessica-parker-23">{currentCandidate ? currentCandidate.candidate_id : "Loading..."}, 23</span>
                                 <span className="top-artist-taylor-swift">
                                     Top Artist: Taylor Swift
                                 </span>
