@@ -34,8 +34,14 @@ const ProfileDetails = () => {
     refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
       spotifyApi.getMe()
         .then((response) => {
-          if (response.images)
-            setImageUrl(response.images[0]['url'])
+          if (response.images) {
+            try {
+              setImageUrl(response.images[0]['url'])
+            }
+            catch (e) {
+              setImageUrl("")
+            }
+          }
           setUserId(response.id)
           setEmail(response.email)
           console.log(response);
