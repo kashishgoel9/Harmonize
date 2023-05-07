@@ -111,7 +111,7 @@ const Passions = () => {
           if (selectGay)
             sexual_orientations.push('gay')
           if (selectLesbian)
-            sexual_orientations.push('straight')
+            sexual_orientations.push('lesbian')
           if (selectBisexual)
             sexual_orientations.push('bisexual')
           if (selectAsexual)
