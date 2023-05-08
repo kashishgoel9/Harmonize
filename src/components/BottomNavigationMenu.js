@@ -25,9 +25,9 @@ function BottomNavigationMenu({ }) {
         '/profiledetails',
         '/iam',
         '/passions',
-        // 'matched',
+        '/matched',
         // 'matches',
-        // 'profile'
+        '/profile_ex'
     ]
 
     // React.useEffect(()=>{

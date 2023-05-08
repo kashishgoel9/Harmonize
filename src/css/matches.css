@@ -134,11 +134,26 @@
     align-items: center;
     display: flex;
     height: 250px;
+    border-radius: 15px;
+    width: 110px;
 }
 
 .leilani-19 {
     align-self: center;
-    margin-bottom: 6px;
+    /* margin-bottom: 6px; */
+    margin: auto;
+    color: white;
+    font-size: 11px;
+    
+}
+
+.bottom_container_matches {
+    background-color: black;
+    border-radius: 0 0 15px 15px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bottom-container-matches {

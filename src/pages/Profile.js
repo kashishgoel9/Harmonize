@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import "../css/profile.css";
 import Top5Chip from '../components/Top5Chip'
 
+import { getProfile } from "../helpers/api_gateway_helper";
+import { truncate } from "../helpers/app_helper";
+import { UNASSIGNED_PROFILE_PICTURE } from '../constants/app_constants'
+
 import doneAll from "../assets/doneAll-profile.svg";
 import btnBack from "../assets/btnBack-profile.svg";
 import doneAll1 from "../assets/doneAll1-profile.svg";
@@ -13,94 +17,65 @@ import btnSend from "../assets/btnSend-profile.svg";
 import photoMain from "../assets/photoMain-profile.svg";
 import localTwo from "../assets/localTwo-profile.svg";
 import Button from "@mui/material/Button";
+import { refreshAccessToken } from '../helpers/auth_helper'
+import SpotifyWebApi from 'spotify-web-api-js';
+
+const spotifyApi = new SpotifyWebApi();
 
 export default function Profile({ }) {
     const navigate = useNavigate();
-    const propsData = {
-        num9: {
-            color: "success",
-            variant: "outlined",
-            disableElevation: true,
-            size: "large",
-            children: "Taylor Swift",
-            endIcon: <img src={doneAll1} />,
-        },
-        num7: {
-            color: "inherit",
-            variant: "outlined",
-            disableElevation: true,
-            size: "large",
-            children: "Eminem",
-        },
-        num8: {
-            variant: "outlined",
-            color: "warning",
-            disableElevation: true,
-            size: "large",
-            children: "Selena Gomez",
-            endIcon: <img src={doneAll2} />,
-        },
-        num6: {
-            color: "warning",
-            variant: "outlined",
-            children: "Maisie Peters",
-            endIcon: <img src={doneAll} />,
-        },
-        num4: {
-            size: "large",
-            color: "success",
-            variant: "outlined",
-            disableElevation: true,
-            children: "Body Better",
-            endIcon: <img src={doneAll1} />,
-        },
-        container3: {
-            color: "error",
-            children: "Button",
-            size: "small",
-        },
-        num1: {
-            disableElevation: true,
-            color: "warning",
-            size: "large",
-            variant: "outlined",
-            children: "champagne problems",
-            endIcon: <img src={doneAll1} />,
-        },
-        num: {
-            size: "large",
-            color: "error",
-            variant: "outlined",
-            disableElevation: true,
-            children: "Burned",
-            endIcon: <img src={doneAll} />,
-        },
-        num3: {
-            variant: "outlined",
-            color: "warning",
-            disableElevation: true,
-            size: "large",
-            children: "Back to you",
-            endIcon: <img src={doneAll2} />,
-        },
-    };
+    const [currentUser, setCurrentUser] = useState(null)
+    const [spotifyUser, setSpotifyUser] = useState(null)
+
+    async function getProfilesHandler() {
+
+        // take above out.
+        const response = await getProfile(JSON.parse(localStorage.getItem('state'))['user_id']);
+        if (!response || response.error) {
+            console.log("Error during fetching profile")
+        }
+        else {
+            console.log(response['user'])
+            refreshAccessToken(localStorage.getItem('refresh_token')).then((data) => {
+                spotifyApi.getUser(JSON.parse(localStorage.getItem('state'))['user_id'])
+                    .then((response) => {
+                        console.log(response);
+                        setSpotifyUser(response)
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+
+            }).catch((e) => {
+                console.log(e)
+                console.log("failed during refresh :(")
+            })
+            setCurrentUser(response['user'])
+        }
+    }
 
     useEffect(() => {
+        getProfilesHandler()
     }, []);
 
     return (
-        <div className="profile">
-            <img className="btn-back-profile" src={btnBack} />
-            <img className="photo-main-profile" src={photoMain} />
+        currentUser != null ? (<div className="profile">
+            <img className="btn-back-profile" src={btnBack} onClick={()=>{navigate(-1)}}/>
+
+
+            <img className="photo-main-profile" src={currentUser.image_url !== "" ? currentUser.image_url : UNASSIGNED_PROFILE_PICTURE} />
             <div className="container-profile">
                 <div className="flex-container-profile1">
                     <div className="flex-container-1-profile">
-                        <span className="jessica-parker-23-profile">Jessica Parker, 23</span>
+                        <span className="jessica-parker-23-profile">{currentUser.first_name} {currentUser.last_name}</span>
                         <span className="top-artist-taylor-swift">
-                            Top Artist: Taylor Swift
+                            Top Artist: {currentUser.top_artists[0]['name']}
                         </span>
                     </div>
-                    <img className="btn-send-profile" src={btnSend} />
+                    <img className="btn-send-profile" src={btnSend} onClick={() => {
+                        if (spotifyUser != null)
+                            window.location.href = spotifyUser.external_urls.spotify
+                    }} />
                 </div>
                 <div className="flex-container-2-profile">
                     <span className="location-profile">Location</span>
@@ -112,51 +87,42 @@ export default function Profile({ }) {
                 <span className="new-york-ny-united-states">
                     New York, NY, United States
                 </span>
-                <span className="spotify">Spotify</span>
-                <span className="jess-park">@jess_park</span>
+                <span className="spotify"><a className="href-color" href={spotifyUser != null ? spotifyUser.external_urls.spotify : ""}>@Spotify</a></span>
+                {/* <span className="jess-park">@jess_park</span> */}
                 <span className="top-5-artists">Top 5 Artists</span>
                 <div className="flex-container-3-profile">
-                    <Top5Chip
-                        name={"Taylor Swift"}
-                    />
-                    <Top5Chip
-                        alt={true}
-                        name={"Grace Vanderwall"}
-                    />
-                    <Top5Chip
-                        name={"Eminem"}
-                    />
-                    <Top5Chip
-                        alt={true}
-                        name={"Selena Gomez"}
-                    />
-                    <Top5Chip
-                        name={"Maisie Peters"}
-                    />
+                    {currentUser.top_artists.map((artist, index) => {
+                        if (index < 5)
+                            return (
+                                <Top5Chip
+                                    key={artist.id}
+                                    alt={true}
+                                    name={artist['name']}
+                                />
+                            );
+                        {/* return <div></div>; */}
+                    })}
                 </div>
 
                 <span className="top-5-songs">Top 5 Songs</span>
                 <div className="flex-container-3-profile">
-                    <Top5Chip
-                        name={"Body Better"}
-                    />
-                    <Top5Chip
-                        alt={true}
-                        name={"On my Mind"}
-                    />
-                    <Top5Chip
-                        name={"champagne problems"}
-                    />
-                    <Top5Chip
-                        alt={true}
-                        name={"Burned"}
-                    />
-                    <Top5Chip
-                        name={"Back to You"}
-                    />
+                    {currentUser.top_tracks.map((track, index) => {
+                        if (index < 5)
+                            return (
+                                <Top5Chip
+                                    key={track.id}
+                                    alt={true}
+                                    name={truncate(track['name'], 30)}
+                                />
+                            );
+                        {/* return <div></div>; */}
+                    })}
                 </div>
+                <div className="end_container"></div>
 
             </div>
+        </div>) : <div className="row loading_row" style={{ width: '100% ' }}>
+            <Spinner className="loading_css" />
         </div>
     );
 

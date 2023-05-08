@@ -37,7 +37,7 @@ const Passions = () => {
 
   return (
     <div className="passions">
-      <img className="btn-back-passions" src={btnBack} />
+      <img className="btn-back-passions" src={btnBack} onClick={() => { navigate(-1) }} />
       <span className="your-sexual-orientations">
         Your sexual orientations?
       </span>

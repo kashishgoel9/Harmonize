@@ -8068,10 +8068,82 @@ export const getProfile = async (userId) => {
         console.log(getUrl);
 
         let res = await fetch(getUrl, requestOptions)
-        // if (res.status === 200)
-        return res.json()
+        if (res.status === 200)
+            return res.json()
     }
     catch (e) {
         throw e;
     }
+};
+
+export const getProfiles = async (userIds) => {
+    try {
+        let user_ids_set = new Set(userIds)
+        let myHeaders = new Headers();
+
+        myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
+
+        let requestOptions = {
+            crossDomain: true,
+            method: 'GET',
+            headers: myHeaders,
+        };
+
+        // console.log("userId: ", userId)
+        let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/users/?ids=" + Array.from(user_ids_set)
+        console.log(getUrl);
+
+        let res = await fetch(getUrl, requestOptions)
+        if (res.status === 200)
+            return res.json()
+    }
+    catch (e) {
+        throw e;
+    }
+};
+
+export const getMatches = async (userId) => {
+    try {
+        let myHeaders = new Headers();
+
+        myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
+
+        let requestOptions = {
+            crossDomain: true,
+            method: 'GET',
+            headers: myHeaders,
+        };
+
+        // console.log("userId: ", userId)
+        let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/matches/" + userId
+        console.log(getUrl);
+
+        let res = await fetch(getUrl, requestOptions)
+        if (res.status === 200)
+            return res.json()
+    }
+    catch (e) {
+        throw e;
+    }
+};
+
+export const decideMatch = async (userId, candidate_id, liked) => {
+    let myHeaders = new Headers();
+
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
+
+    let requestOptions = {
+        crossDomain: true,
+        method: 'POST',
+        headers: myHeaders
+    };
+    // 8vdbh1l832bir71plxiziiyed
+    let getUrl = process.env.REACT_APP_API_GATEWAY_URL + `/decide-match?candidateId=${candidate_id}&id=${userId}&isMatch=${liked}`
+    // candidateId=987vnefivxyn6rgxhrwqcg01x&id=8vdbh1l832bir71plxiziiyed&isMatch=true
+    console.log(getUrl)
+
+    let res = await fetch(getUrl, requestOptions)
+    if (res.status === 200)
+        return res.json()
 };

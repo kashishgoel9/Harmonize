@@ -146,4 +146,8 @@ const ProfileDetails = () => {
 };
 export default ProfileDetails;
 // 8vdbh1l832bir71plxiziiyed
+// candidateId=8vdbh1l832bir71plxiziiyed&id=987vnefivxyn6rgxhrwqcg01x&isMatch=true
+// candidateId=8vdbh1l832bir71plxiziiyed&id=rcktvo4o8qbefahye66dacmok&isMatch=true
+// unmatchedId=987vnefivxyn6rgxhrwqcg01x
+// ids=['987vnefivxyn6rgxhrwqcg01x', 'rcktvo4o8qbefahye66dacmok']
 

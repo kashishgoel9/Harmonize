@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import "../css/iam.css";
 import btnBack from "../assets/btnBack.svg";
@@ -51,7 +52,7 @@ const Iam = () => {
 
   return (
     <div className="i-am">
-      <img className="btn-back-iam" src={btnBack} />
+      <img className="btn-back-iam" src={btnBack} onClick={()=>{navigate(-1)}}/>
       <span className="i-am-a">I am a</span>
       <Cardman className="woman-instance"
         onClick={() => {

@@ -12,6 +12,7 @@ import Passions from "./pages/Passions";
 import Matched from "./pages/Matched";
 import Matches from "./pages/Matches";
 import Profile from "./pages/Profile";
+import ProfileEx from "./pages/ProfileEx";
 import BottomNavigationMenu from "./components/BottomNavigationMenu";
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/matched" element={<Matched />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile_ex" element={<ProfileEx />} />
         {/* <Route
           path="/:establishmentUniqueName/check"
           element={

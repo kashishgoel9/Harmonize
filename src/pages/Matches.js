@@ -9,8 +9,11 @@ import like2 from "../assets/like2-matches.svg";
 import btnFilter from "../assets/btnFilter-matches.svg";
 import MatchCardAsset from '../components/MatchCardAsset';
 
+import { getMatches } from "../helpers/api_gateway_helper";
+
 export default function Matches({ }) {
     const navigate = useNavigate();
+    const [user_matches, setUserMatches] = useState(null)
 
     let matched_users = [
         {
@@ -50,12 +53,31 @@ export default function Matches({ }) {
         },
     ]
 
+    async function getMatchesHandler() {
+
+        // take above out.
+        const response = await getMatches(JSON.parse(localStorage.getItem('state'))['user_id']);
+        if (!response || response.error) {
+            console.log("Error during fetching matches")
+        }
+        else {
+            console.log(response['matches'])
+            setUserMatches(response['matches'])
+        }
+
+
+        // console.log(res.json())
+        // if (res.candidate_found === 'true')
+        //     setCurrentCandidate(res.candidate_id)
+    }
+
 
     useEffect(() => {
+        getMatchesHandler()
     }, []);
 
     return (
-        <div className="matches-matches" style={{marginBottom: '400px'}}>
+        <div className="matches-matches" style={{ marginBottom: '400px' }}>
             <div className="flex-container-matches">
                 <span className="matches-1">Matches</span>
                 <img className="btn-filter-matches" src={btnFilter} />
@@ -64,13 +86,17 @@ export default function Matches({ }) {
                 This is a list of people who have liked you and your matches.
             </span>
             {/* MatchCardAsset */}
-            <div className="matched_user_container">
+            {user_matches == null && <div className="matched_user_container" style={{ 'alignContent': 'center' }}>
+                <Spinner style={{ color: 'black' }} />
+            </div>}
+            {user_matches != null && <div className="matched_user_container">
                 <MatchCardAsset
-                    matched_users={matched_users}
+                    matched_users={user_matches}
                 />
-            </div>
-            <div style={{paddingBottom: '20px', color: 'white', display: 'block'}}>dnod</div>
-            
+            </div>}
+
+            <div style={{ paddingBottom: '20px', color: 'white', display: 'block' }}>dnod</div>
+
         </div>
     );
 }
