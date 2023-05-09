@@ -9,9 +9,10 @@ function Cardman({ className, props, isSelected, onClick }) {
     <div onClick={onClick} className={`cardman ${className || ""}`}>
       <div className={isSelected ? "container-iam selected" : "container-iam not_selected"}>
         <span className="man">{props.man || "Man"}</span>
-        <img className={isSelected ? "check-small" : "check-small"} src={props.man === "Choose another" ? right : (isSelected ? checkSmall : checkSmall1)} />
+        <img className={isSelected ? "check-small" : "check-small"} src={(isSelected ? checkSmall : checkSmall1)} />
       </div>
     </div>
   );
 };
+
 export default Cardman;

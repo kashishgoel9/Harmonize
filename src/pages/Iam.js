@@ -29,8 +29,8 @@ const Iam = () => {
       man: "Man",
     },
     woman1: {
-      man: "Choose another",
-      checkSmall: right,
+      man: "Other",
+      checkSmall: checkSmall1,
     },
   };
 
