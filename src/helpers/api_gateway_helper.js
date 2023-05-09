@@ -8027,6 +8027,31 @@ export const createUser = async (userId, userData) => {
         });
 };
 
+export const editUser = async (userId, userData) => {
+    try {
+        let myHeaders = new Headers();
+
+        // myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("X-Api-Key", process.env.REACT_APP_API_GATEWAY_KEY);
+
+        let requestOptions = {
+            crossDomain: true,
+            method: 'PUT',
+            headers: myHeaders,
+            body: userData
+        };
+        // 8vdbh1l832bir71plxiziiyed
+        let getUrl = process.env.REACT_APP_API_GATEWAY_URL + "/users/" + userId + "/edit-user"
+        console.log(getUrl)
+
+        let res = await fetch(getUrl, requestOptions)
+        if (res.status === 200)
+            return res.json()
+    } catch (error) {
+        console.log(error)
+    }
+};
+
 export const getCandidates = async (userId) => {
     try {
         let myHeaders = new Headers();
