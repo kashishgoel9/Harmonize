@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import queryString from 'query-string';
-import { decode as base64_decode, encode as base64_encode } from 'base-64';
+import { encode as base64_encode } from 'base-64';
 
 const spotifyApi = new SpotifyWebApi();
 

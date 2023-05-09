@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import "../css/passions.css";
 import btnBack from "../assets/btnBack.svg";

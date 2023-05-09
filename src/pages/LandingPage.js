@@ -1,12 +1,11 @@
-import React, { useEffect, useReducer, useState } from "react";
-import Spinner from "react-bootstrap/Spinner";
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import photo from "../assets/photo.svg";
 import onboardingDots from "../assets/onboardingDots.svg";
-import homeIndicator from "../assets/homeIndicator.svg";
 import Button from "react-bootstrap/Button";
 
-export default function LandingPage({ }) {
+export default function LandingPage() {
     const navigate = useNavigate();
     // const [tax_rate, setTaxRate] = useState(0.0);
     const propsData = {

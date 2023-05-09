@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import * as React from "react";
 import "../css/matches.css";
-import bottomContainer from "../assets/bottomContainer.svg";
 import { getProfiles } from "../helpers/api_gateway_helper";
 import Spinner from "react-bootstrap/Spinner";
 import { UNASSIGNED_PROFILE_PICTURE } from "../constants/app_constants";
@@ -10,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function MatchCardAsset({ matched_users }) {
     let navigate = useNavigate();
     const [matched_users_data, setMatchedUsersData] = React.useState(null);
+    const [failed, setFailed] = React.useState(false);
 
 
     async function getProfilesHandler(user_ids) {
@@ -18,6 +18,8 @@ function MatchCardAsset({ matched_users }) {
         const response = await getProfiles(user_ids);
         if (!response || response.error) {
             console.log("Error during fetching profile MatchCardAsset")
+            setFailed(true)
+
         }
         else {
             console.log(response['users'])
@@ -43,13 +45,25 @@ function MatchCardAsset({ matched_users }) {
                         </div>
                     );
                 })
-            ) : <div style={{
+            ) : (!failed) ? (<div style={{
                 alignContent: 'center',
                 display: 'flex',
                 justifyContent: 'center',
                 height: '400px',
                 alignItems: 'center',
-            }}><Spinner style={{ color: 'black' }} /></div>}
+            }}><Spinner style={{ color: 'black' }} /></div>) : (
+                <div className="col" style={{
+                    height: '50vh',
+                    display: 'flex',
+                    placeContent: 'center',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    flexDirection: 'column',
+                    color: 'black'
+                }}>
+                    {/* <Spinner style={{ color: 'black' }} /> */}
+                    <div>No matches found.</div>
+                </div >)}
 
         </div>
     );

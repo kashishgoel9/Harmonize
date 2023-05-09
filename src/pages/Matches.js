@@ -1,57 +1,16 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "../css/matches.css";
-import Button from "react-bootstrap/Button";
-
-// import homeIndicator from "../assets/homeIndicator-matches.svg";
-import like2 from "../assets/like2-matches.svg";
 import btnFilter from "../assets/btnFilter-matches.svg";
 import MatchCardAsset from '../components/MatchCardAsset';
 
 import { getMatches } from "../helpers/api_gateway_helper";
 
-export default function Matches({ }) {
-    const navigate = useNavigate();
+export default function Matches() {
+    // const navigate = useNavigate();
     const [user_matches, setUserMatches] = useState(null)
-
-    let matched_users = [
-        {
-            "first_name": "Aryan",
-            "last_name": "Jalali",
-            "user_id": "8vdbh1l832bir71plxiziiyed",
-            "image_url": "https://images.unsplash.com/photo-1623741519006-a9b6f27ae909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-            'dob': '24'
-        },
-        {
-            "first_name": "Aryan",
-            "last_name": "Jalali",
-            "user_id": "8vdbh1l832bir71plxiziiyed1",
-            "image_url": "https://images.unsplash.com/photo-1623741519006-a9b6f27ae909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-            'dob': '24'
-        },
-        {
-            "first_name": "Aryan",
-            "last_name": "Jalali",
-            "user_id": "8vdbh1l832bir71plxiziiyed2",
-            "image_url": "https://images.unsplash.com/photo-1623741519006-a9b6f27ae909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-            'dob': '24'
-        },
-        {
-            "first_name": "Aryan",
-            "last_name": "Jalali",
-            "user_id": "8vdbh1l832bir71plxiziiyed3",
-            "image_url": "https://images.unsplash.com/photo-1623741519006-a9b6f27ae909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-            'dob': '24'
-        },
-        {
-            "first_name": "Aryan",
-            "last_name": "Jalali",
-            "user_id": "8vdbh1l832bir71plxiziiyed4",
-            "image_url": "https://images.unsplash.com/photo-1623741519006-a9b6f27ae909?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-            'dob': '24'
-        },
-    ]
 
     async function getMatchesHandler() {
 

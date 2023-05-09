@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useEffect } from "react";
+// import { useLocation } from 'react-router-dom';
 import "../css/signup.css";
 import musicNoteBeamed from "../assets/musicNoteBeamed.svg";
 import Button from "react-bootstrap/Button";
-import { SpotifyAuth, Scopes } from 'react-spotify-auth'
-import { onAccessToken, onRefreshToken } from '../helpers/auth_helper'
 import 'react-spotify-auth/dist/index.css'
 
-export default function Signup({ }) {
+export default function Signup() {
     // const [tax_rate, setTaxRate] = useState(0.0);
     const propsData = {
         btnContinueWithEmail: {

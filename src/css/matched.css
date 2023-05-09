@@ -15,6 +15,65 @@
     display: flex;
 }
 
+.leilanid-19 {
+    align-self: center;
+    /* margin-bottom: 6px; */
+    margin: auto;
+    color: white;
+    font-size: 11px;
+    
+}
+
+.photo-matched1 {
+    height: 100%;
+    background-color: #c4c4c4;
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: flex-start;
+    align-items: center;
+    display: flex;
+    height: 250px;
+    border-radius: 15px;
+    width: 150px;
+    position: absolute;
+    left: 20vw;
+    top: 20vh;
+    z-index: 2;
+    transform: rotate(-10deg);
+}
+
+.photo-matched2 {
+    height: 100%;
+    background-color: #c4c4c4;
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: flex-start;
+    align-items: center;
+    display: flex;
+    height: 250px;
+    border-radius: 15px;
+    width: 150px;
+    position: absolute;
+    right: 20vw;
+    top: 5vh;
+    transform: rotate(10deg);
+}
+
+.bottom_container_matched {
+    background-color: black;
+    border-radius: 0 0 15px 15px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .photos {
     width: 295px;
     height: 404px;
@@ -28,6 +87,7 @@
     margin-left: 1px;
     font-size: 1.786rem;
     line-height: 38px;
+    padding-top: 50vh;
 }
 
 .start-a-conversation-now-with-ea {

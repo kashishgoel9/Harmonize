@@ -10,7 +10,7 @@ import face from "../assets/face.svg";
 import iconCalendar from "../assets/iconCalendar.svg";
 import Button from "react-bootstrap/Button";
 import DatePicker from 'react-date-picker'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { refreshAccessToken } from '../helpers/auth_helper'
 import SpotifyWebApi from 'spotify-web-api-js';
 

@@ -1,5 +1,6 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 import "../css/profile.css";
@@ -9,20 +10,15 @@ import { getProfile } from "../helpers/api_gateway_helper";
 import { truncate } from "../helpers/app_helper";
 import { UNASSIGNED_PROFILE_PICTURE } from '../constants/app_constants'
 
-import doneAll from "../assets/doneAll-profile.svg";
 import btnBack from "../assets/btnBack-profile.svg";
-import doneAll1 from "../assets/doneAll1-profile.svg";
-import doneAll2 from "../assets/doneAll2-profile.svg";
 import btnSend from "../assets/btnSend-profile.svg";
-import photoMain from "../assets/photoMain-profile.svg";
 import localTwo from "../assets/localTwo-profile.svg";
-import Button from "@mui/material/Button";
 import { refreshAccessToken } from '../helpers/auth_helper'
 import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi();
 
-export default function Profile({ }) {
+export default function Profile() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(null)
     const [spotifyUser, setSpotifyUser] = useState(null)
@@ -100,7 +96,6 @@ export default function Profile({ }) {
                                     name={artist['name']}
                                 />
                             );
-                        {/* return <div></div>; */}
                     })}
                 </div>
 
@@ -115,7 +110,6 @@ export default function Profile({ }) {
                                     name={truncate(track['name'], 30)}
                                 />
                             );
-                        {/* return <div></div>; */}
                     })}
                 </div>
                 <div className="end_container"></div>

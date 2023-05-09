@@ -1,16 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import SpotifyWebApi from 'spotify-web-api-js';
 import "../css/homepage.css";
-import { refreshAccessToken } from '../helpers/auth_helper'
 import Spinner from "react-bootstrap/Spinner";
-import paginationV from "../assets/paginationV.svg";
 import btnFilter from "../assets/btnFilter.svg";
-import photoBg from "../assets/photoBg.svg";
-import photoBlurred24Px from "../assets/photoBlurred24Px.svg";
-import photoMain from "../assets/photoMain.svg";
-import homeIndicator from "../assets/homeIndicator2.svg";
 import btnBack from "../assets/btnBack.svg";
 import navBar from "../assets/navBar.svg";
 import Button from "react-bootstrap/Button";
@@ -19,23 +12,11 @@ import { UNASSIGNED_PROFILE_PICTURE } from "../constants/app_constants";
 import { getCandidates, getProfile, decideMatch } from '../helpers/api_gateway_helper'
 
 
-const spotifyApi = new SpotifyWebApi();
 
-export default function Homepage({ }) {
+export default function Homepage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [candidateLoading, setCandidateLoading] = useState(false);
     const [currentCandidate, setCurrentCandidate] = useState(null);
-    // const [currentCandidateProfile, setCurrentCandidateProfile] = useState(null);
-
-
-    const propsData = {
-        location: {
-            variant: "light",
-            active: true,
-            children: "1 mi",
-        },
-    };
 
     useEffect(() => {
         console.log(location.state)

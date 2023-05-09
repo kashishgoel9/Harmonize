@@ -165,13 +165,6 @@
     line-height: 21px;
 }
 
-.photo-blurred-24-px {
-    /* width: 295px;
-    height: 83px;
-    object-fit: cover;
-    align-self: flex-start; */
-}
-
 .spinner_col {
     display: flex;
     flex-wrap: wrap;

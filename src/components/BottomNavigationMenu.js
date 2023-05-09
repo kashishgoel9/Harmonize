@@ -12,7 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 /* eslint-disable jsx-a11y/alt-text */
 import "../css/bottom_navigation_menu.css";
 
-function BottomNavigationMenu({ }) {
+function BottomNavigationMenu() {
     const navigate = useNavigate();
     const location = useLocation();
 
