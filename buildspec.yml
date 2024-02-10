@@ -1,0 +1,75 @@
+version: 0.2
+
+env:
+  variables:
+    FRONTEND_BUCKET: "findlove"
+
+phases:
+  pre_build:
+    commands:
+      - pwd
+      - ls
+      - printenv
+
+  build:
+    commands:
+      - echo "Deploying Lambdas..."
+      - cd lambdas
+      - echo "Deploying create_user..."
+      - cd create_user
+      - cp -r ../common .
+      - zip -r create_user.zip *
+      - aws lambda update-function-code --function-name create_user --zip-file fileb://create_user.zip
+      - echo "Deploying decide_match..."
+      - cd ../decide_match
+      - cp -r ../common .
+      - zip -r decide_match.zip *
+      - aws lambda update-function-code --function-name decide_match --zip-file fileb://decide_match.zip
+      - echo "Deploying delete_user..."
+      - cd ../delete_user
+      - cp -r ../common .
+      - zip -r delete_user.zip *
+      - aws lambda update-function-code --function-name delete_user --zip-file fileb://delete_user.zip
+      - echo "Deploying edit_user..."
+      - cd ../edit_user
+      - cp -r ../common .
+      - zip -r edit_user.zip *
+      - aws lambda update-function-code --function-name edit_user --zip-file fileb://edit_user.zip
+      - echo "Deploying get_candidates..."
+      - cd ../get_candidates
+      - cp -r ../common .
+      - zip -r get_candidates.zip *
+      - aws lambda update-function-code --function-name get_candidates --zip-file fileb://get_candidates.zip
+      - echo "Deploying get_match..."
+      - cd ../get_match
+      - cp -r ../common .
+      - zip -r get_match.zip *
+      - aws lambda update-function-code --function-name get_match --zip-file fileb://get_match.zip
+      - echo "Deploying unmatch..."
+      - cd ../unmatch
+      - cp -r ../common .
+      - zip -r unmatch.zip *
+      - aws lambda update-function-code --function-name unmatch --zip-file fileb://unmatch.zip
+
+      - cd ../get_profile
+      - cp -r ../common .
+      - pip install --target ./package simplejson
+      - cd package
+      - zip -r ../get_profile.zip .
+      - cd ..
+      - zip get_profile.zip lambda_function.py
+      - zip -r get_profile.zip common/
+      # - zip -r get_profile.zip *
+      - aws lambda update-function-code --function-name get_profile --zip-file fileb://get_profile.zip
+
+      - cd ../get_profiles
+      - cp -r ../common .
+      - pip install --target ./package simplejson
+      - cd package
+      - zip -r ../get_profiles.zip .
+      - cd ..
+      - zip get_profiles.zip lambda_function.py
+      - zip -r get_profiles.zip common/
+      # - zip -r get_profile.zip *
+      - aws lambda update-function-code --function-name get_profiles --zip-file fileb://get_profiles.zip
+      - echo "Done"
